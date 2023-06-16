@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QuestionnaireApplicationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AnswerDetail">
+          <Key>
+            <PropertyRef Name="AnswerId" />
+          </Key>
+          <Property Name="AnswerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserAnswer" Type="varchar" MaxLength="200" />
+          <Property Name="QuestionId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Mark" Type="int" />
+          <Property Name="Time" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="QuestionId" />
+          </Key>
+          <Property Name="QuestionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionText" Type="varchar" MaxLength="250" />
+          <Property Name="AnswerText" Type="varchar" MaxLength="250" />
+          <Property Name="Option1" Type="varchar" MaxLength="250" />
+          <Property Name="Option2" Type="varchar" MaxLength="50" />
+          <Property Name="Option3" Type="varchar" MaxLength="250" />
+          <Property Name="Option4" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ResultDetail">
+          <Key>
+            <PropertyRef Name="ResultId" />
+          </Key>
+          <Property Name="ResultId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Score" Type="int" />
+          <Property Name="TimeTaken" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__AnswerDet__Quest__35BCFE0A">
+          <End Role="Question" Type="Self.Question" Multiplicity="0..1" />
+          <End Role="AnswerDetail" Type="Self.AnswerDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionId" />
+            </Principal>
+            <Dependent Role="AnswerDetail">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AnswerDet__UserI__36B12243">
+          <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="0..1" />
+          <End Role="AnswerDetail" Type="Self.AnswerDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetail">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AnswerDetail">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultDetail_UserDetail">
+          <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="0..1" />
+          <End Role="ResultDetail" Type="Self.ResultDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetail">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ResultDetail">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuestionnaireApplicationModelStoreContainer">
+          <EntitySet Name="AnswerDetail" EntityType="Self.AnswerDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResultDetail" EntityType="Self.ResultDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDetail" EntityType="Self.UserDetail" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AnswerDet__Quest__35BCFE0A" Association="Self.FK__AnswerDet__Quest__35BCFE0A">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="AnswerDetail" EntitySet="AnswerDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AnswerDet__UserI__36B12243" Association="Self.FK__AnswerDet__UserI__36B12243">
+            <End Role="UserDetail" EntitySet="UserDetail" />
+            <End Role="AnswerDetail" EntitySet="AnswerDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultDetail_UserDetail" Association="Self.FK_ResultDetail_UserDetail">
+            <End Role="UserDetail" EntitySet="UserDetail" />
+            <End Role="ResultDetail" EntitySet="ResultDetail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuestionnaireApplicationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AnswerDetail">
+          <Key>
+            <PropertyRef Name="AnswerId" />
+          </Key>
+          <Property Name="AnswerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserAnswer" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="QuestionId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Mark" Type="Int32" />
+          <Property Name="Time" Type="Time" Precision="7" />
+          <NavigationProperty Name="Question" Relationship="Self.FK__AnswerDet__Quest__35BCFE0A" FromRole="AnswerDetail" ToRole="Question" />
+          <NavigationProperty Name="UserDetail" Relationship="Self.FK__AnswerDet__UserI__36B12243" FromRole="AnswerDetail" ToRole="UserDetail" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="QuestionId" />
+          </Key>
+          <Property Name="QuestionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionText" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="AnswerText" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Option1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Option2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Option3" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Option4" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AnswerDetails" Relationship="Self.FK__AnswerDet__Quest__35BCFE0A" FromRole="Question" ToRole="AnswerDetail" />
+        </EntityType>
+        <EntityType Name="ResultDetail">
+          <Key>
+            <PropertyRef Name="ResultId" />
+          </Key>
+          <Property Name="ResultId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Score" Type="Int32" />
+          <Property Name="TimeTaken" Type="Time" Precision="7" />
+          <NavigationProperty Name="UserDetail" Relationship="Self.FK_ResultDetail_UserDetail" FromRole="ResultDetail" ToRole="UserDetail" />
+        </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AnswerDetails" Relationship="Self.FK__AnswerDet__UserI__36B12243" FromRole="UserDetail" ToRole="AnswerDetail" />
+          <NavigationProperty Name="ResultDetails" Relationship="Self.FK_ResultDetail_UserDetail" FromRole="UserDetail" ToRole="ResultDetail" />
+        </EntityType>
+        <Association Name="FK__AnswerDet__Quest__35BCFE0A">
+          <End Role="Question" Type="Self.Question" Multiplicity="0..1" />
+          <End Role="AnswerDetail" Type="Self.AnswerDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionId" />
+            </Principal>
+            <Dependent Role="AnswerDetail">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AnswerDet__UserI__36B12243">
+          <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="0..1" />
+          <End Role="AnswerDetail" Type="Self.AnswerDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetail">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AnswerDetail">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultDetail_UserDetail">
+          <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="0..1" />
+          <End Role="ResultDetail" Type="Self.ResultDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetail">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ResultDetail">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuestionnaireApplicationEntities7" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AnswerDetails" EntityType="Self.AnswerDetail" />
+          <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="ResultDetails" EntityType="Self.ResultDetail" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+          <AssociationSet Name="FK__AnswerDet__Quest__35BCFE0A" Association="Self.FK__AnswerDet__Quest__35BCFE0A">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="AnswerDetail" EntitySet="AnswerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AnswerDet__UserI__36B12243" Association="Self.FK__AnswerDet__UserI__36B12243">
+            <End Role="UserDetail" EntitySet="UserDetails" />
+            <End Role="AnswerDetail" EntitySet="AnswerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultDetail_UserDetail" Association="Self.FK_ResultDetail_UserDetail">
+            <End Role="UserDetail" EntitySet="UserDetails" />
+            <End Role="ResultDetail" EntitySet="ResultDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuestionnaireApplicationModelStoreContainer" CdmEntityContainer="QuestionnaireApplicationEntities7">
+          <EntitySetMapping Name="AnswerDetails">
+            <EntityTypeMapping TypeName="QuestionnaireApplicationModel.AnswerDetail">
+              <MappingFragment StoreEntitySet="AnswerDetail">
+                <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+                <ScalarProperty Name="UserAnswer" ColumnName="UserAnswer" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="QuestionnaireApplicationModel.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+                <ScalarProperty Name="AnswerText" ColumnName="AnswerText" />
+                <ScalarProperty Name="Option1" ColumnName="Option1" />
+                <ScalarProperty Name="Option2" ColumnName="Option2" />
+                <ScalarProperty Name="Option3" ColumnName="Option3" />
+                <ScalarProperty Name="Option4" ColumnName="Option4" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultDetails">
+            <EntityTypeMapping TypeName="QuestionnaireApplicationModel.ResultDetail">
+              <MappingFragment StoreEntitySet="ResultDetail">
+                <ScalarProperty Name="ResultId" ColumnName="ResultId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="TimeTaken" ColumnName="TimeTaken" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="QuestionnaireApplicationModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetail">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

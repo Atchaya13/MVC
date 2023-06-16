@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AssetManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Asset">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AssetName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="BrandId" Type="Int32" Nullable="false" />
+    <Property Name="AvailableCount" Type="Int32" Nullable="false" />
+    <Property Name="TotalCount" Type="Int32" Nullable="false" />
+    <Property Name="WarrentyEndDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Brand" Relationship="Self.FK_Asset_BrandId_Brand_Id" FromRole="Asset" ToRole="Brand" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_Asset_CategoryId_Category_Id" FromRole="Asset" ToRole="Category" />
+    <NavigationProperty Name="AssetUserMappings" Relationship="Self.FK_AssetUserMapping_AssetId_Asset_Id" FromRole="Asset" ToRole="AssetUserMapping" />
+  </EntityType>
+  <EntityType Name="AssetUserMapping">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="AssetId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Asset" Relationship="Self.FK_AssetUserMapping_AssetId_Asset_Id" FromRole="AssetUserMapping" ToRole="Asset" />
+    <NavigationProperty Name="User" Relationship="Self.FK_AssetUserMapping_UserId_User_Id" FromRole="AssetUserMapping" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Brand">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Assets" Relationship="Self.FK_Asset_BrandId_Brand_Id" FromRole="Brand" ToRole="Asset" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Assets" Relationship="Self.FK_Asset_CategoryId_Category_Id" FromRole="Category" ToRole="Asset" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AssetUserMappings" Relationship="Self.FK_AssetUserMapping_UserId_User_Id" FromRole="User" ToRole="AssetUserMapping" />
+  </EntityType>
+  <Association Name="FK_Asset_BrandId_Brand_Id">
+    <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+    <End Role="Asset" Type="Self.Asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Asset">
+        <PropertyRef Name="BrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Asset_CategoryId_Category_Id">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Asset" Type="Self.Asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Asset">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetUserMapping_AssetId_Asset_Id">
+    <End Role="Asset" Type="Self.Asset" Multiplicity="1" />
+    <End Role="AssetUserMapping" Type="Self.AssetUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asset">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AssetUserMapping">
+        <PropertyRef Name="AssetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetUserMapping_UserId_User_Id">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="AssetUserMapping" Type="Self.AssetUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AssetUserMapping">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AssetManagementEntitiesNew" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Assets" EntityType="Self.Asset" />
+    <EntitySet Name="AssetUserMappings" EntityType="Self.AssetUserMapping" />
+    <EntitySet Name="Brands" EntityType="Self.Brand" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Asset_BrandId_Brand_Id" Association="Self.FK_Asset_BrandId_Brand_Id">
+      <End Role="Brand" EntitySet="Brands" />
+      <End Role="Asset" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Asset_CategoryId_Category_Id" Association="Self.FK_Asset_CategoryId_Category_Id">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Asset" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetUserMapping_AssetId_Asset_Id" Association="Self.FK_AssetUserMapping_AssetId_Asset_Id">
+      <End Role="Asset" EntitySet="Assets" />
+      <End Role="AssetUserMapping" EntitySet="AssetUserMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetUserMapping_UserId_User_Id" Association="Self.FK_AssetUserMapping_UserId_User_Id">
+      <End Role="User" EntitySet="Users" />
+      <End Role="AssetUserMapping" EntitySet="AssetUserMappings" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

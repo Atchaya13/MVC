@@ -1,0 +1,21 @@
+﻿<nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">Food Ordering  Application</span>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+         
+            <a class="nav-link home" href="@Url.Action("Index", "Food")">Home </a>
+
+        </li>
+
+    </ul>
+    <div class="form-inline">
+
+        <b style="padding-right:20px;color:black;font-weight:bold">@Session["UserName"]</b>
+       
+    <div class="wrapper" style="margin-right: 31px;">
+        <i class="fa fa-shopping-cart fa-2x" aria-hidden="true" style="padding:8px;background-color:white;border-radius:50%;" onclick="location.href='@Url.Action( "CartItems","Food")'"></i>
+        <span id="cart-item">  </span>
+    </div>
+        <button style="text-decoration: none;" class="btn btn-dark" type="submit" onclick="LogOut()">Log Out</button>
+    </div>
+</nav>

@@ -1,0 +1,54 @@
+﻿@model KudosBoardDatas.KudosboardModel.Post
+@{
+    ViewBag.Title = "AddPost";
+}
+@Html.Partial("_NavBar")
+<br />
+
+<div class="container">
+    @using (Html.BeginForm("AddPost", "Board", FormMethod.Post, new { enctype = "multipart/form-data", name = "addForm" }))
+    {
+        <section class="h-100 h-custom" style="background-color: #eee;">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-lg-8 col-xl-6">
+                        <div class="card rounded-3">
+
+                            <div class="card-body p-4 p-md-5">
+                                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Add a Post</h3>
+
+                                <form class="px-md-2">
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example1q">Message</label>
+
+                                        @Html.TextAreaFor(model => model.Message, new { @class = "form-control", id = "message" ,placeholder="Hello,Type your message here"})
+                                        @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger", id = "message-error" })
+
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example1q">Photo</label>
+                                        <br/>
+                                        <input type="file" name="ImageFile" id="file" required />
+                                        <label id="file-error"></label>
+
+                                    </div>
+                                    <label class="text-success">@ViewBag.successMessage</label>
+
+                                    <button type="button" class="btn btn-success btn-lg mb-1" id="add-button" style="align-items:center" onclick="ValidatePost();">Post</button>
+
+                                    <button type="button" class="btn btn-info btn-lg mb-1" style="align-items:center" onclick="location.href='@Url.Action( "Index","Board")';return false;">Discard Post</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+
+
+</div>
+@Scripts.Render("~/ValidationScript/js")
+

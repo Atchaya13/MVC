@@ -1,0 +1,193 @@
+﻿@model IEnumerable<AssertManagementRepository.AssertModel.Asset>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DisplayAsserts</title>
+    @*bootstrap*@
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    @*jquery*@
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    @*popup*@
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    @*dt*@
+    <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+    @*fontAwesome link*@
+    <link rel="StyleSheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        body {
+            /*font-family:'Times New Roman';*/ /*font-family:sans-serif;*/
+           /* font-style:italic;*/
+        }
+        #add-icon 
+        {
+            background-color: whitesmoke;
+            padding: 10px;
+            border-radius: 50px;
+            margin-bottom: 5px;
+        }
+
+        #add-icon:hover 
+        {
+                cursor: pointer;
+        }
+    </style>
+   
+</head>
+<body>
+
+    <div class="container">
+        <h1 style="text-align: center; background-color: pink; padding: 8px; color: deeppink; font-family: 'Times New Roman'; text-shadow: 2px 2px white;border-radius:10px">AVAILABLE ASSETS</h1>
+        <br />
+        <i class="fa fa-plus fa-2x" id="add-icon" onclick="location.href='@Url.Action( "AddAsset","Assert")';return false;">Add Asset</i>
+        <br />
+        <br />
+
+        <table id="assert-detail" class="table table-bordered">
+            <thead style="background-color:#eee" class="text-center">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Total quantity</th>
+                    <th scope="col">Available count</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var asset in Model)
+                {
+                    if (asset.AvailableCount < 10)
+                    {
+                        <tr style="background-color:lightyellow">
+                            <td>@Html.DisplayFor(model => asset.Id)</td>
+                            <td class="assign-user" id="@asset.Id" onclick="location.href = '@Url.Action( "FetchUserList","Assert",new {  id =asset.Id })';FetchAsset(this)" >@Html.DisplayFor(model => asset.AssetName)</td>
+                            @*<td class="assign-user" id="@asset.Id" onclick="FetchAsset(this); FetchUsers(this);">@Html.DisplayFor(model => asset.AssetName)</td>*@
+                            <td>
+
+                                <i class="fa fa-minus" aria-hidden="true" id=@asset.Id onclick="Decrese(this)"></i>
+                                <span id="myid @asset.Id">
+                                    @Html.DisplayFor(model => asset.TotalCount, new { @class = "total", id = "id" + @asset.Id, value = asset.TotalCount })
+                                </span>
+
+                                <i class="fa fa-plus" aria-hidden="true" id=@asset.Id onclick="Increse(this)"></i>
+
+                            </td>
+                            <td id="availablity @asset.Id">
+                                @Html.DisplayFor(model => asset.AvailableCount)
+                            </td>
+                            <td>
+
+                                <button id="@asset.Id" class="btn btn-danger delete" onclick="DeleteAsset(this)">Delete</button>
+                                @*<i class="fa fa-trash fa-2x" style="color:white;background-color:red;padding:5px;border-radius:2px" aria-hidden="true"></i>*@
+                            </td>
+                            <td>
+
+                                <button id="@Html.DisplayFor(mode => asset.Id)" class="btn btn-primary" onclick="location.href='@Url.Action( "UpdateView","Assert",new {  id =asset.Id })';">Edit</button>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+            <tr>
+                <td>@Html.DisplayFor(model => asset.Id)</td>
+                <td class="assign-user" id="@asset.Id" onclick="location.href='@Url.Action( "FetchUserList","Assert",new {  id =asset.Id })';FetchAsset(this)">@Html.DisplayFor(model => asset.AssetName)</td>
+                @*<td class="assign-user" id="@asset.Id" onclick="FetchAsset(this); FetchUsers(this);">@Html.DisplayFor(model => asset.AssetName)</td>*@
+                <td>
+                    <i class="fa fa-minus" aria-hidden="true" id=@asset.Id onclick="Decrese(this)"></i>
+                    <span id="myid @asset.Id">
+                        @Html.DisplayFor(model => asset.TotalCount, new { @class = "total", id = "id" + @asset.Id, value = asset.TotalCount })
+                    </span>
+                    <i class="fa fa-plus" aria-hidden="true" id=@asset.Id onclick="Increse(this)"></i>
+                </td>
+                <td id="availablity @asset.Id">@Html.DisplayFor(model => asset.AvailableCount, new { @class = "total" })</td>
+                <td>
+                    <button id="@asset.Id" class="btn btn-danger delete" onclick="DeleteAsset(this)">Delete</button>
+                </td>
+                <td>
+                    <button id="@Html.DisplayFor(mode => asset.Id)" class="btn btn-primary" onclick="location.href='@Url.Action( "UpdateView","Assert",new {  id =asset.Id })';return false;">Edit</button>
+                </td>
+            </tr>
+                    }
+
+                }
+            </tbody>
+        </table>
+       
+
+
+        @if (ViewBag.UpdateSuccess != null)
+        {
+            <script>
+                alert("Data updated successfully");
+            </script>
+        }
+        
+        @if (ViewBag.assetAdded != null)
+        {
+            <script>
+                alert("Asset assigned successfully");
+            </script>
+        }
+     
+    </div>
+	<div class="modal fade" id="ModalPopUp" role="dialog">
+		<div class="modal-dialog err-pop" style="">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button id="DivClose" type="button" class="close" data-dismiss="modal">&times;</button>
+
+				</div>
+
+				<div class="modal-body" style="text-align:center;">
+					<h3> Available Users</h3>
+					<br />
+					<label>Users</label>
+					@Html.DropDownList("ObjList", (IEnumerable<SelectListItem>)ViewBag.list,new { id = "drop-down", @class = "form-control" })
+					<br />
+					<button class="btn btn-primary" id="assign" style="float:right;margin-left:7px" onclick="clickkk();">Submit</button>
+					
+					<button class="btn btn-info" style="float:right" onclick="ClosePopUp();">Cancel</button>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	@Scripts.Render("~/DisplayAssets/js")
+
+	@if(ViewBag.openPopUp != null)
+    {
+		<script>
+			$('#ModalPopUp').modal('show');
+		</script>
+	}
+	<script>
+         var MyAppUrlSettings =
+         {
+            MyUsefulUrl:'@Url.Action("DeleteDetail", "Assert")',
+            PlusUrl: '@Url.Action("IncreseTotalQuantity", "Assert")',
+	     	MinusUrl: '@Url.Action("DecreaseTotalQuantity", "Assert")',
+            ResourseAssignUrl: '@Url.Action("AssignResourse", "Assert")',
+            ResourseUrl: '@Url.Action("Index","Assert")',
+            FetchUserUrl: '@Url.Action("FetchUserList", "Assert")'
+         }
+    </script>
+</body>
+</html>

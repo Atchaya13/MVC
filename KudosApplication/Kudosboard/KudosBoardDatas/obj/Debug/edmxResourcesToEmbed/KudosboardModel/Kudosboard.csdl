@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KudosDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="KudoRecipient">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KudoId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="Kudo" Relationship="Self.FK_KudoRecipients_Kudos_KudoId" FromRole="KudoRecipients" ToRole="Kudos" />
+    <NavigationProperty Name="User" Relationship="Self.FK_KudoRecipients_Users_UserId" FromRole="KudoRecipients" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Kudo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Occasion" Type="Int32" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="KudoRecipients" Relationship="Self.FK_KudoRecipients_Kudos_KudoId" FromRole="Kudos" ToRole="KudoRecipients" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Kudos_Users_CreatedByUserId" FromRole="Kudos" ToRole="Users" />
+    <NavigationProperty Name="Posts" Relationship="Self.FK_Posts_Kudos_KudoId" FromRole="Kudos" ToRole="Posts" />
+  </EntityType>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PostOwnerId" Type="Int32" />
+    <Property Name="KudoId" Type="Int32" />
+    <Property Name="ImageName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <NavigationProperty Name="Kudo" Relationship="Self.FK_Posts_Kudos_KudoId" FromRole="Posts" ToRole="Kudos" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Posts_Users_PostOwnerId" FromRole="Posts" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="KudoRecipients" Relationship="Self.FK_KudoRecipients_Users_UserId" FromRole="Users" ToRole="KudoRecipients" />
+    <NavigationProperty Name="Kudos" Relationship="Self.FK_Kudos_Users_CreatedByUserId" FromRole="Users" ToRole="Kudos" />
+    <NavigationProperty Name="Posts" Relationship="Self.FK_Posts_Users_PostOwnerId" FromRole="Users" ToRole="Posts" />
+  </EntityType>
+  <Association Name="FK_KudoRecipients_Kudos_KudoId">
+    <End Role="Kudos" Type="Self.Kudo" Multiplicity="0..1" />
+    <End Role="KudoRecipients" Type="Self.KudoRecipient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kudos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="KudoRecipients">
+        <PropertyRef Name="KudoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KudoRecipients_Users_UserId">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="KudoRecipients" Type="Self.KudoRecipient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="KudoRecipients">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kudos_Users_CreatedByUserId">
+    <End Role="Users" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Kudos" Type="Self.Kudo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Kudos">
+        <PropertyRef Name="CreatedByUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Posts_Kudos_KudoId">
+    <End Role="Kudos" Type="Self.Kudo" Multiplicity="0..1" />
+    <End Role="Posts" Type="Self.Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kudos">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Posts">
+        <PropertyRef Name="KudoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Posts_Users_PostOwnerId">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Posts" Type="Self.Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Posts">
+        <PropertyRef Name="PostOwnerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="KudosDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="KudoRecipients" EntityType="Self.KudoRecipient" />
+    <EntitySet Name="Kudos" EntityType="Self.Kudo" />
+    <EntitySet Name="Posts" EntityType="Self.Post" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_KudoRecipients_Kudos_KudoId" Association="Self.FK_KudoRecipients_Kudos_KudoId">
+      <End Role="Kudos" EntitySet="Kudos" />
+      <End Role="KudoRecipients" EntitySet="KudoRecipients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KudoRecipients_Users_UserId" Association="Self.FK_KudoRecipients_Users_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="KudoRecipients" EntitySet="KudoRecipients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kudos_Users_CreatedByUserId" Association="Self.FK_Kudos_Users_CreatedByUserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Kudos" EntitySet="Kudos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Posts_Kudos_KudoId" Association="Self.FK_Posts_Kudos_KudoId">
+      <End Role="Kudos" EntitySet="Kudos" />
+      <End Role="Posts" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Posts_Users_PostOwnerId" Association="Self.FK_Posts_Users_PostOwnerId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Posts" EntitySet="Posts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,111 @@
+﻿@model OnlineQuestionnaireApplication.ViewMode.SummaryPage
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SummaryPage</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<body>
+    @Html.Partial("_NavBar")
+    <br/>
+    <div class="container">
+        @if (Model.resultDetail.Score >= 30)
+        {
+            <div style="background-color: #bbff99; padding: 20px; display: flex; justify-content: space-around; border-radius: 20px; ">
+
+                <h6><b style="font-size:20px;">Test Name: </b>ASP.NET MVC</h6>
+                <h6><b style="font-size:20px;">Score: </b>@Model.resultDetail.Score</h6>
+                <h6><b style="font-size:20px;">Result : </b>Pass</h6>
+                <h6><b style="font-size:20px;">Time : </b>@Model.resultDetail.TimeTaken</h6>
+               
+
+                    @if (Model.resultDetail.Score == 30)
+                {
+                    <h5> you have 3 correct answer out of 5</h5>
+                }
+                    @if (Model.resultDetail.Score == 40)
+                {
+                    <h5> you have 4 correct answer out of 5</h5>
+                }
+                    @if (Model.resultDetail.Score == 50)
+                {
+                    <h5> you have 5 correct answer out of 5</h5>
+                }
+
+            </div>
+
+
+
+
+        }
+                else
+                {
+
+    <div style="background-color: #ff6666; padding: 20px; display: flex; justify-content: space-around; border-radius: 20px; ">
+
+        <h6><b style="font-size:20px;">Test Name: </b>ASP.NET MVC</h6>
+        <h6><b style="font-size:20px;">Score: </b>@Model.resultDetail.Score</h6>
+        <h6><b style="font-size:20px;">Result : </b>Fail</h6>
+        <h6><b style="font-size:20px;">Time : </b>@Model.resultDetail.TimeTaken</h6>
+        @if (Model.resultDetail.Score == 10)
+                {
+            <h5> you have 1 correct answer out of 5</h5>
+        }
+                    @if (Model.resultDetail.Score == 20)
+                {
+            <h5> you have 2 correct answer out of 5</h5>
+        }
+                    @if (Model.resultDetail.Score == 0|| Model.resultDetail.Score==null)
+        
+        {
+            <h5> you have 0 correct answer out of 5</h5>
+        }
+    </div>
+                }
+        <div style="margin-left:20px;">
+            <br />
+            @foreach (var i in Model.questions)
+            {
+               
+                <h5 style="font-family:'Times New Roman'"><b>@(Model.questions.IndexOf(i)+1).@i.QuestionText</b></h5>
+                <div style="margin-left:10px;font-family:sans-serif">
+                    <h6><b>a)</b>@i.Option1</h6>
+                    <h6><b>b)</b>@i.Option2</h6>
+                    <h6><b>c)</b>@i.Option3</h6>
+                    <h6><b>d)</b>@i.Option4</h6>
+                </div>
+
+                if (@Model.answerDetail.Find(x => x.QuestionId == i.QuestionId).UserAnswer == null || @Model.answerDetail.Find(x => x.QuestionId == i.QuestionId).UserAnswer != @i.AnswerText)
+                {
+                    <h5 style="background-color: #ff6666; padding: 6px; border-radius: 6px; width: 150px;">Your Answer:@Model.answerDetail.Find(x => x.QuestionId == i.QuestionId).UserAnswer</h5>
+                }
+                else
+                {
+                    <h5 style="background-color: #bbff99;padding:6px;border-radius:6px;width:150px;">Your Answer:@Model.answerDetail.Find(x => x.QuestionId == i.QuestionId).UserAnswer</h5>
+                }
+
+                <h5 style="color:deepskyblue;font-family:'Times New Roman'">Correct Answer:@i.AnswerText</h5>
+                <br />
+            }
+
+        </div>
+
+    </div>
+    <script>
+        function LogOut()
+        {
+            sessionStorage.clear();
+            window.location.href = '/Account/LogOut'
+        }
+    </script>
+</body>
+</html>

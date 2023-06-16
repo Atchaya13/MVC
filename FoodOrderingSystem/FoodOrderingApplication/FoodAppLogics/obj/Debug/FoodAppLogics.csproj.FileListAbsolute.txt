@@ -1,0 +1,15 @@
+C:\Users\atchayaa\source\repos\FoodOrderingApplication\FoodAppLogics\bin\Debug\FoodAppLogics.dll.config
+C:\Users\atchayaa\source\repos\FoodOrderingApplication\FoodAppLogics\bin\Debug\FoodAppLogics.dll
+C:\Users\atchayaa\source\repos\FoodOrderingApplication\FoodAppLogics\bin\Debug\FoodAppLogics.pdb
+C:\Users\atchayaa\source\repos\FoodOrderingApplication\FoodAppLogics\bin\Debug\EntityFramework.dll
+C:\Users\atchayaa\source\repos\FoodOrderingApplication\FoodAppLogics\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\atchayaa\source\repos\FoodOrderingApplication\FoodAppLogics\bin\Debug\FoodRepository.dll
+C:\Users\atchayaa\source\repos\FoodOrderingApplication\FoodAppLogics\bin\Debug\FoodRepository.pdb
+C:\Users\atchayaa\source\repos\FoodOrderingApplication\FoodAppLogics\bin\Debug\FoodRepository.dll.config
+C:\Users\atchayaa\source\repos\FoodOrderingApplication\FoodAppLogics\bin\Debug\EntityFramework.xml
+C:\Users\atchayaa\source\repos\FoodOrderingApplication\FoodAppLogics\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\atchayaa\source\repos\FoodOrderingApplication\FoodAppLogics\obj\Debug\FoodAppLogics.csproj.AssemblyReference.cache
+C:\Users\atchayaa\source\repos\FoodOrderingApplication\FoodAppLogics\obj\Debug\FoodAppLogics.csproj.CoreCompileInputs.cache
+C:\Users\atchayaa\source\repos\FoodOrderingApplication\FoodAppLogics\obj\Debug\FoodAppLogics.csproj.CopyComplete
+C:\Users\atchayaa\source\repos\FoodOrderingApplication\FoodAppLogics\obj\Debug\FoodAppLogics.dll
+C:\Users\atchayaa\source\repos\FoodOrderingApplication\FoodAppLogics\obj\Debug\FoodAppLogics.pdb

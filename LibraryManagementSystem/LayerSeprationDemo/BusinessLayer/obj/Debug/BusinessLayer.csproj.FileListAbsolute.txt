@@ -1,0 +1,15 @@
+C:\Users\atchayaa\source\repos\LayerSeprationDemo\BusinessLayer\bin\Debug\BusinessLayer.dll
+C:\Users\atchayaa\source\repos\LayerSeprationDemo\BusinessLayer\bin\Debug\BusinessLayer.pdb
+C:\Users\atchayaa\source\repos\LayerSeprationDemo\BusinessLayer\bin\Debug\DataLayer.dll
+C:\Users\atchayaa\source\repos\LayerSeprationDemo\BusinessLayer\bin\Debug\Model.dll
+C:\Users\atchayaa\source\repos\LayerSeprationDemo\BusinessLayer\bin\Debug\EntityFramework.dll
+C:\Users\atchayaa\source\repos\LayerSeprationDemo\BusinessLayer\bin\Debug\DataLayer.pdb
+C:\Users\atchayaa\source\repos\LayerSeprationDemo\BusinessLayer\bin\Debug\DataLayer.dll.config
+C:\Users\atchayaa\source\repos\LayerSeprationDemo\BusinessLayer\bin\Debug\Model.pdb
+C:\Users\atchayaa\source\repos\LayerSeprationDemo\BusinessLayer\bin\Debug\Model.dll.config
+C:\Users\atchayaa\source\repos\LayerSeprationDemo\BusinessLayer\bin\Debug\EntityFramework.xml
+C:\Users\atchayaa\source\repos\LayerSeprationDemo\BusinessLayer\obj\Debug\BusinessLayer.csproj.AssemblyReference.cache
+C:\Users\atchayaa\source\repos\LayerSeprationDemo\BusinessLayer\obj\Debug\BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\atchayaa\source\repos\LayerSeprationDemo\BusinessLayer\obj\Debug\BusinessLayer.csproj.CopyComplete
+C:\Users\atchayaa\source\repos\LayerSeprationDemo\BusinessLayer\obj\Debug\BusinessLayer.dll
+C:\Users\atchayaa\source\repos\LayerSeprationDemo\BusinessLayer\obj\Debug\BusinessLayer.pdb

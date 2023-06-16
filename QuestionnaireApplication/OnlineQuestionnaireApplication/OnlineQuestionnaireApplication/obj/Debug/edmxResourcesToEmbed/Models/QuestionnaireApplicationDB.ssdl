@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QuestionnaireApplicationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AnswerDetail">
+    <Key>
+      <PropertyRef Name="AnswerId" />
+    </Key>
+    <Property Name="AnswerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserAnswer" Type="varchar" MaxLength="200" />
+    <Property Name="QuestionId" Type="int" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="Mark" Type="int" />
+    <Property Name="Time" Type="time" Precision="7" />
+  </EntityType>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="QuestionId" />
+    </Key>
+    <Property Name="QuestionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuestionText" Type="varchar" MaxLength="250" />
+    <Property Name="AnswerText" Type="varchar" MaxLength="250" />
+    <Property Name="Option1" Type="varchar" MaxLength="250" />
+    <Property Name="Option2" Type="varchar" MaxLength="50" />
+    <Property Name="Option3" Type="varchar" MaxLength="250" />
+    <Property Name="Option4" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="ResultDetail">
+    <Key>
+      <PropertyRef Name="ResultId" />
+    </Key>
+    <Property Name="ResultId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="Score" Type="int" />
+    <Property Name="TimeTaken" Type="time" Precision="7" />
+  </EntityType>
+  <EntityType Name="UserDetail">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__AnswerDet__Quest__35BCFE0A">
+    <End Role="Question" Type="Self.Question" Multiplicity="0..1" />
+    <End Role="AnswerDetail" Type="Self.AnswerDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="QuestionId" />
+      </Principal>
+      <Dependent Role="AnswerDetail">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AnswerDet__UserI__36B12243">
+    <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="0..1" />
+    <End Role="AnswerDetail" Type="Self.AnswerDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetail">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="AnswerDetail">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ResultDetail_UserDetail">
+    <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="0..1" />
+    <End Role="ResultDetail" Type="Self.ResultDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetail">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ResultDetail">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QuestionnaireApplicationModelStoreContainer">
+    <EntitySet Name="AnswerDetail" EntityType="Self.AnswerDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ResultDetail" EntityType="Self.ResultDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserDetail" EntityType="Self.UserDetail" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__AnswerDet__Quest__35BCFE0A" Association="Self.FK__AnswerDet__Quest__35BCFE0A">
+      <End Role="Question" EntitySet="Question" />
+      <End Role="AnswerDetail" EntitySet="AnswerDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AnswerDet__UserI__36B12243" Association="Self.FK__AnswerDet__UserI__36B12243">
+      <End Role="UserDetail" EntitySet="UserDetail" />
+      <End Role="AnswerDetail" EntitySet="AnswerDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ResultDetail_UserDetail" Association="Self.FK_ResultDetail_UserDetail">
+      <End Role="UserDetail" EntitySet="UserDetail" />
+      <End Role="ResultDetail" EntitySet="ResultDetail" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="KudosDBModelStoreContainer" CdmEntityContainer="KudosDBEntitiesNew">
+    <EntitySetMapping Name="KudoRecipients">
+      <EntityTypeMapping TypeName="KudosDBModel.KudoRecipient">
+        <MappingFragment StoreEntitySet="KudoRecipients">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="KudoId" ColumnName="KudoId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kudos">
+      <EntityTypeMapping TypeName="KudosDBModel.Kudo">
+        <MappingFragment StoreEntitySet="Kudos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Occasion" ColumnName="Occasion" />
+          <ScalarProperty Name="CreatedByUserId" ColumnName="CreatedByUserId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Occations">
+      <EntityTypeMapping TypeName="KudosDBModel.Occation">
+        <MappingFragment StoreEntitySet="Occation">
+          <ScalarProperty Name="OccationId" ColumnName="OccationId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Posts">
+      <EntityTypeMapping TypeName="KudosDBModel.Post">
+        <MappingFragment StoreEntitySet="Posts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="PostOwnerId" ColumnName="PostOwnerId" />
+          <ScalarProperty Name="KudoId" ColumnName="KudoId" />
+          <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="KudosDBModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

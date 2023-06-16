@@ -1,0 +1,78 @@
+﻿@model IEnumerable<KudosBoardDatas.KudosboardModel.Post>
+@{
+    ViewBag.Title = "BoardView";
+}
+<style>
+    body {
+        background-color: #eee;
+    }
+
+    .mycontainer {
+        display: flex;
+        justify-content: center;
+    }
+
+    .board {
+        height: 40%;
+        width: 100%;
+        background-color: lightblue;
+        padding: 5%;
+        justify-content: center;
+        text-align: center;
+        color: white;
+    }
+
+    .myContainner {
+        display: flex;
+        column-gap: 7%;
+        flex-wrap: wrap;
+        row-gap: 20px;
+    }
+
+    .card {
+        box-shadow: 0 0 10px silver;
+        transition: 300ms all;
+    }
+
+        .card:hover {
+            transform: scale(1.1);
+        }
+
+    .myContainner {
+        margin-left: 3rem;
+    }
+</style>
+
+@Html.Partial("_NavBar")
+<div class="container">
+    <br />
+    <br />
+    <div class="mycontainer">
+
+        <div class="board" style="background-color:lightblue;">
+            <h1>@Session["Tittle"]</h1>
+        </div>
+
+    </div>
+    <button class="btn" style="background-color:white;border-radius:20px;margin-top:-20px;margin-left:40px;" onclick="AddPost();"><i class="fa fa-plus"></i> Add to board</button>
+    <br /><br />
+    <div class="myContainner">
+
+        @foreach (var i in Model)
+        {
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@Url.Content(i.ImageName)" alt="Card image cap">
+                <div class="card-body">
+                    <p class="card-text">@i.Message</p>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+<script>
+    function AddPost() {
+        window.location.href = '/Board/AddPost';
+    }
+</script>
+

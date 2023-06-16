@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a48938d7cdc94621ad94e2c9e49202b5" Name="Diagram1">
+        <EntityTypeShape EntityType="FoodOrderingApplicationModel.Cart" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodOrderingApplicationModel.FoodItem" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodOrderingApplicationModel.OrderDetail" Width="1.5" PointX="6" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodOrderingApplicationModel.PaymentType" Width="1.5" PointX="3.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodOrderingApplicationModel.User" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="FoodOrderingApplicationModel.FK__Cart__FoodId__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodOrderingApplicationModel.FK__Cart__UserId__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodOrderingApplicationModel.FK__OrderDeta__FoodI__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodOrderingApplicationModel.FK__OrderDeta__Payme__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodOrderingApplicationModel.FK__OrderDeta__UserI__31EC6D26" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

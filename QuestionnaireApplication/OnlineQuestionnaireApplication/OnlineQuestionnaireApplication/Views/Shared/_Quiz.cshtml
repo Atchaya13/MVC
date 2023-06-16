@@ -1,0 +1,44 @@
+﻿@model  OnlineQuestionnaireApplication.Models.Question
+
+<div class="container">
+
+    @using (Html.BeginForm("Indexx", "Student", FormMethod.Post, new { id = "quiz-sheet" }))
+    {
+      
+        <div style="background-color: #eee; margin-top: 40px; display: flex; justify-content: space-around; align-content: space-around; padding: 15px;border-radius:8px; " class="container">
+            <h5>Question @Html.DisplayFor(model => model.Count) out of 5</h5>
+            <h5 style="padding-left:110px">Test Name:ASP.NET MVC</h5>
+            <h5 style="padding-left:120px"> Score:@Model.CurrentMark</h5>
+            <h5 style="padding-left:150px" ;> Timer:</h5>
+            <h5 id="timer"></h5>
+        </div>
+        <br />
+
+        <input type="hidden" name="Time" id="timetextinput" />
+        @Html.HiddenFor(model => model.QuestionId)
+<div style="margin-left:10px;background-color:whitesmoke;padding:20px;border-radius:8px;">
+    <h5 style="font-family:'Times New Roman';padding-bottom:5px;">
+        <b>
+            Q. @Html.DisplayFor(model => model.QuestionText)
+        </b>
+
+    </h5>
+
+
+    <div style="margin-left: 10px;font-family:sans-serif">
+        <input type="radio" name="UserAnswer" value="a">
+        <label for="a">@Html.DisplayFor(model => model.Option1)</label><br>
+        <input type="radio" name="UserAnswer" value="b">
+        <label for="b">@Html.DisplayFor(model => model.Option2)</label><br>
+        <input type="radio" name="UserAnswer" value="c">
+        <label for="c">@Html.DisplayFor(model => model.Option3)</label><br>
+        <input type="radio" name="UserAnswer" value="d">
+        <label for="d">@Html.DisplayFor(model => model.Option4)</label><br>
+    </div>
+    <button type="submit" class="btn btn-primary" style="margin-left:1000px" onclick="NextQuestion()">Next</button>
+</div>
+
+      
+    }
+
+</div>

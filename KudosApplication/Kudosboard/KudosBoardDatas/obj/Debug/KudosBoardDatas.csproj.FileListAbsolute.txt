@@ -1,0 +1,12 @@
+C:\Users\atchayaa\source\repos\Kudosboard\KudosBoardDatas\bin\Debug\KudosBoardDatas.dll.config
+C:\Users\atchayaa\source\repos\Kudosboard\KudosBoardDatas\bin\Debug\KudosBoardDatas.dll
+C:\Users\atchayaa\source\repos\Kudosboard\KudosBoardDatas\bin\Debug\KudosBoardDatas.pdb
+C:\Users\atchayaa\source\repos\Kudosboard\KudosBoardDatas\bin\Debug\EntityFramework.dll
+C:\Users\atchayaa\source\repos\Kudosboard\KudosBoardDatas\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\atchayaa\source\repos\Kudosboard\KudosBoardDatas\bin\Debug\EntityFramework.xml
+C:\Users\atchayaa\source\repos\Kudosboard\KudosBoardDatas\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\atchayaa\source\repos\Kudosboard\KudosBoardDatas\obj\Debug\KudosBoardDatas.csproj.AssemblyReference.cache
+C:\Users\atchayaa\source\repos\Kudosboard\KudosBoardDatas\obj\Debug\KudosBoardDatas.csproj.CoreCompileInputs.cache
+C:\Users\atchayaa\source\repos\Kudosboard\KudosBoardDatas\obj\Debug\KudosBoardDatas.csproj.CopyComplete
+C:\Users\atchayaa\source\repos\Kudosboard\KudosBoardDatas\obj\Debug\KudosBoardDatas.dll
+C:\Users\atchayaa\source\repos\Kudosboard\KudosBoardDatas\obj\Debug\KudosBoardDatas.pdb

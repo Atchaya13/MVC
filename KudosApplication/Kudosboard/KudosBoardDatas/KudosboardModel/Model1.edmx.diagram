@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b9fa31358759415a9e83e46e7af29bf0" Name="Diagram1">
+        <EntityTypeShape EntityType="KudosDBModel.KudoRecipient" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="KudosDBModel.Kudo" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KudosDBModel.Occation" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KudosDBModel.Post" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KudosDBModel.User" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="KudosDBModel.FK_KudoRecipients_Kudos_KudoId" ManuallyRouted="false" />
+        <AssociationConnector Association="KudosDBModel.FK_KudoRecipients_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="KudosDBModel.FK__Kudos__Occasion__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="KudosDBModel.FK_Kudos_Users_CreatedByUserId" ManuallyRouted="false" />
+        <AssociationConnector Association="KudosDBModel.FK_Posts_Kudos_KudoId" ManuallyRouted="false" />
+        <AssociationConnector Association="KudosDBModel.FK_Posts_Users_PostOwnerId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

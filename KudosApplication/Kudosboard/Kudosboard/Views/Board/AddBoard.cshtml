@@ -1,0 +1,63 @@
+﻿@model KudosBoardDatas.KudosboardModel.Kudo
+@{
+    ViewBag.Title = "AddBoard";
+}
+
+@Html.Partial("_NavBar")
+
+<br />
+<br />
+<div class="container">
+    @using (Html.BeginForm("AddKudos", "Board", FormMethod.Post, new { id = "add-form", name = "addForm" }))
+    {
+        <section class="h-100 h-custom" style="background-color: #eee;">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-lg-8 col-xl-6">
+                        <div class="card rounded-3">
+
+                            <div class="card-body p-4 p-md-5">
+                                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2" style="text-align:center;color:hotpink">Add Kudos</h3>
+
+                                <form class="px-md-2">
+
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example1q">Occation Name</label>
+
+                                        <select class="form-control" id="dropdown" name="Occasion"></select>
+                                        <label id="dropdown-error" class="text-danger"></label>
+
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example1q">Receipient Name</label>
+                                        @Html.EditorFor(model => model.ReceipientName, new { htmlAttributes = new { @class = "form-control", id = "name" } })
+                                        <label id="name-error" class="text-danger"></label>
+                                        <label class="text-danger">@ViewBag.failureMessage</label>
+                                    </div>
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example1q">Tittle</label>
+                                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", id = "title" } })
+                                        <label id="title-error" class="text-danger"></label>
+
+                                    </div>
+
+                                    <label class="text-success">@ViewBag.message</label>
+                                
+                                    
+                                    <br />
+
+                                    <button type="button" class="btn btn-success btn-lg mb-1" id="add-button" style="align-items:center" onclick="Validate();">Submit</button>
+
+                                    <button type="button" class="btn btn-info btn-lg mb-1" style="align-items:center" onclick="location.href='@Url.Action( "Index","Board")';return false;">Back</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+</div>
+</br>
+@Scripts.Render("~/KudosScript/js")
